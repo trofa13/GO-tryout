@@ -17,27 +17,32 @@ type speaker interface {
 	speak() string
 }
 
-func (g human) speak() string {
-	if g.age < 60 {
-		return g.name + " tells some words of foolishness"
+func (h human) speak() string {
+	if h.age < 60 {
+		return h.name + " tells some words of foolishness"
 	}
-	return g.name + " tells some words of wisdom"
+	return h.name + " tells some words of wisdom"
+}
+
+func (r robot) speak() string {
+	return "Hello, I'm robot " + r.name
 }
 
 func main() {
-	humansList := getHumans()
+	speakersList := getSpeakers()
 
-	for _, person := range humansList {
-		fmt.Println(person.speak())
+	for _, speaker := range speakersList {
+		fmt.Println(speaker.speak())
 	}
 }
 
 
-func getHumans() []*human {
+func getSpeakers() []speaker {
 	person1 := &human{name: "Alex", age: 20}
 	person2 := &human{name: "Anton", age: 70}
 	person3 := &human{name: "Valera", age: 15}
+	robot1 := &robot{name: "Bender", material: "stainless steel"}
 
-	list := []*human{person1, person2, person3}
+	list := []speaker{person1, person2, person3, robot1}
 	return list
 }
